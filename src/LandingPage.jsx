@@ -396,7 +396,7 @@ function LandingPage(){
                                     <h3 className='card1-image-text-h3'>Lead Founder & Instructor</h3>
                             </div>
                             <div className='image-overlay'>
-                                <img className='ourTeamSection-img' src="src/images/codeon_expert_img-removebg-preview.png" alt="" />
+                                <img className='ourTeamSection-img' src="images/codeon_expert_img-removebg-preview.png" alt="" />
                             </div>
                         </div>
                         <div className='horizontal-line-oTS'></div>
