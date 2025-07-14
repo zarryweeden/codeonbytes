@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faUsersLine ,faRobot,faDiagramProject,faCalendarDay,faMinus, faArrowRight, faGraduationCap,faBriefcase,faUserTie,faUsers, faCheck, faTrophy, faPlus, faQ, faPhone, faLocation, faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import {  faUsersLine ,faRobot,faDiagramProject,faCalendarDay,faMinus, faArrowRight, faGraduationCap,faBriefcase,faUserTie,faUsers, faCheck, faTrophy, faPlus, faQ, faPhone, faLocation, faEnvelope, faComment, faArrowDown, faAngleDown, faSearch, faPaperPlane, faMessage,faHome, faCommentDots} from '@fortawesome/free-solid-svg-icons';
 import { useEffect,useState } from 'react';
 import { 
   faFacebook, 
@@ -201,7 +201,11 @@ function LandingPage(){
         console.error('Submission failed:', error.response?.data || error.message);
         alert('Something went wrong.');
         }
+
+
+     
     };
+    const [isClicked,setIsClicked] = useState(false)
     return(
         
         <div className="bodyy">
@@ -331,6 +335,37 @@ function LandingPage(){
                                     <h2>Classes have started !</h2>
                                 </div>
                             </div>
+                            <div className='chat-section'>
+                                <div className='chat-icon'>
+                                    { isClicked ? <FontAwesomeIcon onClick={()=>setIsClicked(false)} className='fa-angleDown' icon={faAngleDown}/>:<FontAwesomeIcon onClick={()=>setIsClicked(true)} className='faComment' icon={faComment} />}
+                                </div>
+                                {isClicked &&(
+                                    <div className='chat-window'>
+                                        <div className='chat-area'>
+                                            <h1>Hi There</h1>
+                                            <div className='help-center'>
+                                                <h1>Help Centre</h1>
+                                                <div className="search-container">
+                                                    <FontAwesomeIcon icon={faSearch} className="search-icon" />
+                                                    <textarea placeholder="Search for answers"></textarea>
+                                                </div>
+                                            </div>
+                                            <div className='new-convo'>
+                                            <div className='new-convo-texts'>
+                                                <h1>New Conversation</h1>
+                                                <p>We typically reply in a few minutes</p>
+                                            </div>
+                                            <FontAwesomeIcon className='faPaperPlane' icon={faPaperPlane} />
+                                        </div>
+                                        <div className='nav-container-footer'>
+                                            <FontAwesomeIcon className='faHome' icon={faHome} />
+                                            <FontAwesomeIcon className='faCommentDotss' icon={faCommentDots} />
+                                        </div>
+                                    </div>
+                                    </div>
+                                )}
+                            </div>
+                            
                     </div>
                 </div>
             </section>
@@ -618,8 +653,8 @@ function LandingPage(){
                                     </div>
                                     <div className='form-group'>
                                         <label className='form-group-label' htmlFor="preferredTrack">Preferred Track</label>
-                                        <select  className='form-group-input' onChange={handleChange} name="preferred_track" id="preferredTrack" required>
-                                            <option value ="" disabled selected>--Select Track--</option>
+                                        <select  className='form-group-input'  defaultValue="" onChange={handleChange} name="preferred_track" id="preferredTrack" required>
+                                            <option value ="" disabled>--Select Track--</option>
                                             <option value="pre-code">Pre-Code: Mathematics & Problem Solving</option>
                                             <option value="coding">Coding: Programming Fundamentals</option>
                                             <option value="undecided">Undecided? (We'll help you choose)</option>
