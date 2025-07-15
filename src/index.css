@@ -319,13 +319,28 @@ body{
   position: fixed;
   left: 89%;
   top: 75%;
-  z-index: 2;
+  z-index: 999;
   cursor: pointer;
 }
 .chat-icon{
   position: fixed;
   left: 89%;
   top: 75%;
+}
+
+
+.chat-area{
+  height: 291px;
+  position: relative;
+}
+
+.faPaperPlaneInput{
+  position: absolute;
+  left: 85%;
+  top: 9px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #3A86FF;
 }
 
 
@@ -448,8 +463,9 @@ textarea {
 
 
 .nav-container-footer{
+  position: sticky;
+  bottom: 0;
   width: 100%;
-  margin-top: 53px;
   display: flex;
   flex-direction: row;
   gap: 90px;
@@ -469,7 +485,16 @@ textarea {
 }
 
 .faHome:hover{
-  color: #56a0b5;
+  color: #ccc;
+}
+
+
+.faHome.active {
+  color: #f08a28; 
+}
+
+.faCommentDotss.active {
+  color:#f08a28; 
 }
 
 .faCommentDotss{
@@ -479,8 +504,77 @@ textarea {
 }
 
 .faCommentDotss:hover{
-  color: #56a0b5;
+  color: #ccc;
 }
+
+
+.chat-us-window-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  margin-top: 0;
+  padding-top: 0;
+  margin-left: 15px;
+  transform: translateY(-13px);
+  
+}
+
+.chat-us-window{
+  display: flex;
+  flex-direction:column;
+  height: 301px;
+}
+
+.horizontal-line-nav-container-footer{
+  height: 0.5px;
+  width: 270px;
+  background-color: rgb(69, 61, 61);
+  align-self: center;
+  justify-self: center;
+}
+
+.input-area-chat-window{
+  width: 79%;
+  margin-left: 12px;
+  border: none;
+  height: 40px;
+  font-family: 'Baloo 2',cursive;
+  font-size: 1rem;
+  background-color:transparent ;
+  margin-bottom: 0;
+
+}
+
+.input-area-chat-window:focus{
+  outline: none;
+}
+
+.chat-area-text-input-area{
+  transform: translateY(185px);
+}
+
+
+
+.chat-us-window-header h1{
+  font-weight: lighter;
+  font-size: 1.3rem;
+  color: #f08a28;
+}
+
+
+.faAngleLeft{
+  font-size: 1.2rem;
+}
+
+
+.chat-content{
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+
 
 
 .applyNow-btn:hover{

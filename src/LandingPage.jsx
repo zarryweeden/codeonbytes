@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faUsersLine ,faRobot,faDiagramProject,faCalendarDay,faMinus, faArrowRight, faGraduationCap,faBriefcase,faUserTie,faUsers, faCheck, faTrophy, faPlus, faQ, faPhone, faLocation, faEnvelope, faComment, faArrowDown, faAngleDown, faSearch, faPaperPlane, faMessage,faHome, faCommentDots} from '@fortawesome/free-solid-svg-icons';
+import {  faUsersLine,faCircleArrowRight ,faRobot,faDiagramProject,faCalendarDay,faMinus, faArrowRight, faGraduationCap,faBriefcase,faUserTie,faUsers, faCheck, faTrophy, faPlus, faQ, faPhone, faLocation, faEnvelope, faComment, faArrowDown, faAngleDown, faSearch, faPaperPlane, faMessage,faHome, faCommentDots, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 import { useEffect,useState } from 'react';
 import { 
   faFacebook, 
@@ -206,6 +206,27 @@ function LandingPage(){
      
     };
     const [isClicked,setIsClicked] = useState(false)
+
+    
+    const [showChatWindow, setShowChatWindow] = useState(true);
+
+
+    const [messages,setMessages] = useState([])
+    const [inputMessage,setInputMessage] = useState('')
+    
+    const handleSendMessage = ()=>{
+        if (inputMessage.trim()){
+            setMessages([...messages,{text: inputMessage, sender:'user'}]);
+            setInputMessage('');
+        }
+    }
+
+    const handleKeyPress = ()=>{
+        if (e.key === 'Enter' && !e.shiftKey){
+            e.preventDefault();
+            handleSendMessage
+        }
+    }
     return(
         
         <div className="bodyy">
@@ -335,40 +356,90 @@ function LandingPage(){
                                     <h2>Classes have started !</h2>
                                 </div>
                             </div>
-                            <div className='chat-section'>
-                                <div className='chat-icon'>
-                                    { isClicked ? <FontAwesomeIcon onClick={()=>setIsClicked(false)} className='fa-angleDown' icon={faAngleDown}/>:<FontAwesomeIcon onClick={()=>setIsClicked(true)} className='faComment' icon={faComment} />}
+                    <div className='chat-section'>
+                        <div className='chat-icon'>
+                        {isClicked ? (
+                            <FontAwesomeIcon 
+                            onClick={() => setIsClicked(false)} 
+                            className='fa-angleDown' 
+                            icon={faAngleDown}
+                            />
+                        ) : (
+                            <FontAwesomeIcon 
+                            onClick={() => setIsClicked(true)} 
+                            className='faComment' 
+                            icon={faComment} 
+                            />
+                        )}
+                        </div>
+                        
+                        {isClicked && (
+                        <div className='chat-window'>
+                            {showChatWindow ? (
+                            <div className='chat-area'>
+                                <h1>Hi There</h1>
+                                <div className='help-center'>
+                                <h1>Help Centre</h1>
+                                <div className="search-container">
+                                    <FontAwesomeIcon icon={faSearch} className="search-icon" />
+                                    <textarea placeholder="Search for answers"></textarea>
                                 </div>
-                                {isClicked &&(
-                                    <div className='chat-window'>
-                                        <div className='chat-area'>
-                                            <h1>Hi There</h1>
-                                            <div className='help-center'>
-                                                <h1>Help Centre</h1>
-                                                <div className="search-container">
-                                                    <FontAwesomeIcon icon={faSearch} className="search-icon" />
-                                                    <textarea placeholder="Search for answers"></textarea>
-                                                </div>
-                                            </div>
-                                            <div className='new-convo'>
-                                            <div className='new-convo-texts'>
-                                                <h1>New Conversation</h1>
-                                                <p>We typically reply in a few minutes</p>
-                                            </div>
-                                            <FontAwesomeIcon className='faPaperPlane' icon={faPaperPlane} />
-                                        </div>
-                                        <div className='nav-container-footer'>
-                                            <FontAwesomeIcon className='faHome' icon={faHome} />
-                                            <FontAwesomeIcon className='faCommentDotss' icon={faCommentDots} />
-                                        </div>
-                                    </div>
-                                    </div>
-                                )}
+                                </div>
+                                <div className='new-convo'>
+                                <div className='new-convo-texts'>
+                                    <h1>New Conversation</h1>
+                                    <p>We typically reply in a few minutes</p>
+                                </div>
+                                <FontAwesomeIcon className='faPaperPlane' icon={faPaperPlane} />
+                                </div>
                             </div>
-                            
+                            ) : (
+                            <div className='chat-us-window'>
+                                <div className='chat-us-window-header'>
+                                <FontAwesomeIcon 
+                                    onClick={() => setShowChatWindow(true)} 
+                                    icon={faAngleLeft} 
+                                    className='faAngleLeft' 
+                                />
+                                <h1>Hi there <i className="bi bi-stars"></i></h1>
+                                </div>
+                                <div className='message-container'>
+                                    {messages.map((msg,index) =>(
+                                        <div key={index} className={`message${msg.sender}`}>
+                                            {msg.text}
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className='chat-content'>
+                                    <div className='chat-area-text-input-area'>
+                                        <div className='horizontal-line-nav-container-footer'></div>
+                                        <input type="text" value={inputMessage} onChange={(e)=>setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder='Enter a Message...' className='input-area-chat-window' />
+                                        <FontAwesomeIcon className='faPaperPlaneInput' onClick={handleSendMessage} icon={faCircleArrowRight} />
+                                        
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            )}
+                            <div className='nav-container-footer'>
+                            <FontAwesomeIcon 
+                                onClick={() => setShowChatWindow(true)} 
+                                className={`faHome ${showChatWindow ? 'active' : ''}`} 
+                                icon={faHome} 
+                            />
+                            <FontAwesomeIcon 
+                                onClick={() => setShowChatWindow(false)} 
+                                className={`faCommentDotss ${!showChatWindow ? 'active' : ''}`} 
+                                icon={faCommentDots} 
+                            />
+                            </div>
+                        </div>
+                        )}
                     </div>
-                </div>
-            </section>
+                                            
+                    </div>
+                    </div>
+                    </section>
             <section className="why-us-section" id='why-us'>
                 <div className="why-us-header">
                     <h1 className="why-us-header-h1">Why Choose Codeonbytes?</h1>
