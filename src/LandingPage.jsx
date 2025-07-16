@@ -224,7 +224,7 @@ function LandingPage(){
     const handleKeyPress = ()=>{
         if (e.key === 'Enter' && !e.shiftKey){
             e.preventDefault();
-            handleSendMessage
+            handleSendMessage();
         }
     }
     return(
@@ -403,20 +403,22 @@ function LandingPage(){
                                 />
                                 <h1>Hi there <i className="bi bi-stars"></i></h1>
                                 </div>
+                                <div className='chat-content-wrapper'>
                                 <div className='message-container'>
                                     {messages.map((msg,index) =>(
-                                        <div key={index} className={`message${msg.sender}`}>
+                                        <div key={index} className={`message ${msg.sender}`}>
                                             {msg.text}
                                         </div>
-                                    ))}
+                                    ))} 
                                 </div>
-                                <div className='chat-content'>
+                                </div>
+                                
                                     <div className='chat-area-text-input-area'>
                                         <div className='horizontal-line-nav-container-footer'></div>
                                         <input type="text" value={inputMessage} onChange={(e)=>setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder='Enter a Message...' className='input-area-chat-window' />
                                         <FontAwesomeIcon className='faPaperPlaneInput' onClick={handleSendMessage} icon={faCircleArrowRight} />
                                         
-                                    </div>
+                                    
                                 </div>
                                 
                             </div>
